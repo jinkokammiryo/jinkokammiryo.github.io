@@ -1,50 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>にわとりの部屋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a3556; --sub:#2f6a93;
+  --font:'Nunito','Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+  /* 文字サイズはここだけで管理 */
+  --fs-body:17px; --fs-small:14px; --fs-h3:19px; --fs-h2:24px; --fs-h1:clamp(30px,9vw,44px);
+}
+*{box-sizing:border-box;margin:0}
+body{
+  font-family:var(--font);font-size:var(--fs-body);line-height:1.85;color:var(--ink);
+  background:linear-gradient(180deg,#4db8ff 0%,#9fdcff 45%,#e6f8ff 100%) fixed;
+  min-height:100vh;overflow-x:hidden;text-shadow:0 1px 0 rgba(255,255,255,.7);
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+.city{position:fixed;left:0;right:0;bottom:0;height:42vh;z-index:0;pointer-events:none;opacity:.5}
+.city svg{width:100%;height:100%}
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:14px 16px 90px}
+.glass{background:rgba(255,255,255,.5);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border:1.5px solid rgba(255,255,255,.9);border-radius:24px;
+  box-shadow:0 8px 24px rgba(10,90,160,.16),inset 0 1px 0 #fff,inset 0 -8px 18px rgba(120,200,255,.22)}
+header{margin-bottom:22px;padding:14px 12px 12px}
+.logo{display:block;text-align:center;font:900 var(--fs-h3)/1 var(--font);letter-spacing:.14em;color:var(--ink);text-decoration:none;margin-bottom:12px}
+.menu{display:flex;gap:6px}
+.btn{position:relative;flex:1;text-align:center;border:0;cursor:pointer;text-decoration:none;overflow:hidden;
+  font:800 var(--fs-small)/1 var(--font);color:#fff;text-shadow:0 1px 2px rgba(0,70,140,.6);
+  padding:12px 4px;border-radius:999px;
+  background:linear-gradient(180deg,#8fdcff,#1b8fe0 55%,#0f78c8);
+  box-shadow:0 3px 8px rgba(10,100,190,.35),inset 0 -2px 4px rgba(0,60,130,.35),inset 0 0 0 1px rgba(255,255,255,.5)}
+.btn::before{content:"";position:absolute;left:6%;right:6%;top:2px;height:48%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.1))}
+.btn.on{background:linear-gradient(180deg,#d9fff0,#2fd0a0 55%,#12a67e)}
+.btn:active{filter:brightness(.9)}
+.btn.lg{flex:none;display:inline-block;font-size:var(--fs-body);padding:15px 28px}
+h1{font:900 var(--fs-h1)/1.2 var(--font);letter-spacing:.04em}
+h2{font:800 var(--fs-h2)/1.3 var(--font);margin-bottom:12px}
+h3{font:800 var(--fs-h3)/1.4 var(--font)}
+.small{font-size:var(--fs-small);color:var(--sub);font-weight:700}
+.hero{padding:34px 20px;text-align:center;margin-bottom:22px}
+.hero h1 span{background:linear-gradient(90deg,#0a6fd0,#19c7c7);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
+.hero p{margin:12px 0 22px}
+.card{padding:20px;margin-bottom:16px;display:block;color:inherit;text-decoration:none}
+a.card:active{filter:brightness(.95)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.grid .card{margin:0;text-align:center;padding:20px 8px}
+.sec{margin:28px 4px 12px;display:flex;align-items:baseline;justify-content:space-between}
+.body p+p{margin-top:.9em}
+.date{font:900 var(--fs-h3)/1.4 var(--font);display:block;margin-bottom:6px}
+.note{text-align:center;margin-top:8px}
+/* パスワード */
+.out{font:800 clamp(24px,8vw,34px)/1.4 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-align:center;word-break:break-all;padding:18px 8px;border-radius:16px;background:rgba(255,255,255,.75);border:1.5px solid #fff;margin:14px 0;text-shadow:none;user-select:all}
+.row{display:flex;gap:10px}
+.row .btn{padding:15px 4px;font-size:var(--fs-body)}
+#msg{min-height:1.6em;margin-top:12px;text-align:center}
+</style>
 </head>
-
-<body style="
-background-color:#FFF8DC;
-color:#5A3A00;
-text-align:center;
-font-family:sans-serif;
-">
-
-<h1 style="color:#D62828;">
-🐔 にわとりの部屋 🥚
-</h1>
-
-<div style="
-width:80%;
-max-width:500px;
-margin:auto;
-padding:20px;
-border:8px solid #D62828;
-border-radius:20px;
-background-color:#FFF5D6;
-">
-
-<h2>🐣 メニュー 🐣</h2>
-
-<p>
-<a href="about.html">🥚 自己紹介</a>
-</p>
-
-<p>
-<a href="diary.html">📖 日記</a>
-</p>
-
-<p>
-<a href="password.html">🔑 パスワード生成機</a>
-</p>
-
+<body>
+<div class="city"><svg id="sk" viewBox="0 0 800 300" preserveAspectRatio="xMidYMax slice"></svg></div>
+<div class="wrap">
+  <header class="glass">
+    <a class="logo" href="#home">にわとりの部屋</a>
+    <nav class="menu">
+      <a class="btn" href="#home" data-p="home">ホーム</a>
+      <a class="btn" href="#about" data-p="about">自己紹介</a>
+      <a class="btn" href="#diary" data-p="diary">日記</a>
+      <a class="btn" href="#password" data-p="password">パスワード</a>
+    </nav>
+  </header>
+  <main id="main"></main>
 </div>
 
-<p>
-ｺｹｺｯｺｰ!今卵が産まれました🥚🥚🥚
-</p>
+<script>
+/* ============ ここを編集して更新する ============ */
+const SITE = {
+  name: "にわとりの部屋",
+  tagline: "ｺｹｺｯｺｰ!今卵が産まれました🥚🥚🥚"
+};
 
+const ABOUT = [
+  "日々の何でもないことを書きます。",
+  "書ければいいな。",
+  "にわとりってひよこだと可愛いのに成長するとトサカが勇ましいよね。"
+];
+
+/* 日記は一番上に1件足すだけ。textは1行=1段落 */
+const POSTS = [
+  {date:"2026/11/10", text:[
+    "最近寒いから音楽聴くのをイヤホンからヘッドホンに変えた。",
+    "ヘッドホンの充電端子が未だにマイクロUSBでびびった。"]},
+  {date:"2026/11/7", text:[
+    "プリンスは髭が左右非対称なイメージなあって、写真を見たら全然左右対称だった。",
+    "音楽のセンスがあれば人の印象だって変えられるのか。",
+    "最後のひと言プリンスでボケれるほど作品を知りません。すいません。"]},
+  {date:"2026/11/5", text:[
+    "今日はこないだ買った精密木工クラフトを組み立てました。",
+    "細かすぎて木が折れてもう再起不能になりました。",
+    "観覧車が作れるはずだったんですが、ハムスターが走ってる謎の円みたいなのが作れました。"]},
+  {date:"2026/11/3", text:[
+    "昨日は結局耐えて鶏鍋を家で食べました。",
+    "リビングでテレビ見ながらご飯食べたかったからキャンプ用のテーブル出したら、戻らなくなってしまいました。",
+    "何か畳む方法があるはずと調べてみてもパワーで押すしかないらしい。製作者は脳筋か。",
+    "ちなみに今日はチゲ鍋です。"]},
+  {date:"2026/11/2", text:[
+    "外飲みは平日1回までって決めてるけど、月曜の今日すでに飲みに行きたい。",
+    "今日我慢して水曜行くのがいいけど今日絶対に我慢できないと思う。"]},
+  {date:"2026/10/30", text:[
+    "顔面が乾燥しまくってるけど、外に居て塗るも無いからとっさにハンドクリーム塗りました。",
+    "冬ですね。"]},
+  {date:"2026/10/29", text:[
+    "AIに頼むと何でも出来ると聞いてコンパイロットに全部投げたら30分で個人サイトが出来ました。",
+    "だけど、改行も全部コードでしないといけないのめんどくさい。ありがとうアメブロ。",
+    "名前勝手にニワトリにされたので毎日産卵したいと思いまポッ🥚"]}
+];
+/* ================================================ */
+
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ps = a => a.map(t => `<p>${esc(t)}</p>`).join('');
+const entry = p => `<article class="card glass"><span class="date">${esc(p.date)}</span><div class="body">${ps(p.text)}</div></article>`;
+
+const PAGES = {
+  home: () => `<section class="hero glass"><h1><span>${esc(SITE.name)}</span></h1>
+      <p>${esc(SITE.tagline)}</p><a class="btn lg" href="#diary">日記を読む</a></section>
+    <div class="grid">
+      <a class="card glass" href="#about"><h3>自己紹介</h3></a>
+      <a class="card glass" href="#diary"><h3>日記</h3></a>
+      <a class="card glass" href="#password" style="grid-column:1/-1"><h3>パスワード生成機</h3></a></div>
+    <div class="sec"><h2>新しい日記</h2><a class="small" href="#diary">すべて見る</a></div>
+    ${POSTS.slice(0, 2).map(entry).join('')}`,
+  about: () => `<h2>自己紹介</h2><div class="card glass body">${ps(ABOUT)}</div>`,
+  diary: () => `<h2>日記</h2>${POSTS.map(entry).join('')}`,
+  password: () => `<h2>パスワード生成機</h2><div class="card glass">
+    <p class="small note">8桁・英大文字/小文字/数字<br>(紛らわしい文字は除外)</p>
+    <div class="out" id="pw"></div>
+    <div class="row"><button class="btn" id="regen" type="button">再生成</button>
+      <button class="btn on" id="copy" type="button">コピー</button></div>
+    <p class="small" id="msg"></p></div>`
+};
+
+/* パスワード生成: 元のルールそのまま */
+function initPw(){
+  const U = "ABCDEFGHJKLMNPQRSTUVWXYZ", L = "abcdefghijkmnopqrstuvwxyz", D = "23456789", ALL = U + L + D, LEN = 8;
+  const randInt = max => {
+    const limit = Math.floor(0x100000000 / max) * max, buf = new Uint32Array(1);
+    do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+    return buf[0] % max;
+  };
+  const pick = s => s[randInt(s.length)];
+  const generate = () => {
+    const c = [pick(U), pick(L), pick(D)];
+    while (c.length < LEN) c.push(pick(ALL));
+    for (let i = c.length - 1; i > 0; i--) { const j = randInt(i + 1); [c[i], c[j]] = [c[j], c[i]]; }
+    return c.join('');
+  };
+  const render = () => { $('#pw').textContent = generate(); $('#msg').textContent = ''; };
+  $('#regen').onclick = render;
+  $('#copy').onclick = async () => {
+    try { await navigator.clipboard.writeText($('#pw').textContent); $('#msg').textContent = 'コピーしました'; }
+    catch (e) { $('#msg').textContent = 'コピーできませんでした。文字をタップして選択してください'; }
+  };
+  render();
+}
+
+function route(){
+  const h = location.hash.slice(1);
+  const page = PAGES[h] ? h : 'home';
+  $('#main').innerHTML = PAGES[page]();
+  document.querySelectorAll('.menu .btn').forEach(b => b.classList.toggle('on', b.dataset.p === page));
+  if (page === 'password') initPw();
+  scrollTo(0, 0);
+}
+addEventListener('hashchange', route); route();
+
+/* 背景の街(動かない) */
+(function(){
+  let s = '', x = 0, seed = 7;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  while (x < 800) {
+    const w = 28 + rnd() * 46, h = 70 + rnd() * 190, y = 300 - h;
+    s += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff" opacity="${.35 + rnd() * .4}"/>`;
+    for (let wy = y + 10; wy < 290; wy += 16) for (let wx = x + 6; wx < x + w - 8; wx += 12)
+      if (rnd() > .6) s += `<rect x="${wx}" y="${wy}" width="5" height="7" fill="#7fd3ff" opacity=".7"/>`;
+    x += w + 3;
+  }
+  $('#sk').innerHTML = s;
+})();
+</script>
 </body>
 </html>
